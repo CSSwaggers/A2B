@@ -1,0 +1,60 @@
+    <!DOCTYPE html>
+    <html>
+      <title>Launch</title>
+      <head>
+        <style type="text/css">
+         html, body { height: 100%; margin: 0; padding: 0; }
+         #map { height: 100%; }
+        </style>
+      </head>
+      <body>
+    
+        <div id="map"></div>
+        <script type="text/javascript">
+        
+          var map;
+          var markerPosition;
+        
+            function initMap(){
+            
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function(position) {
+                  
+                var googlePosition = {lat: position.coords.latitude, lng: position.coords.longitude};
+                
+                map = new google.maps.Map(document.getElementById('map'), {
+                  center: googlePosition,
+                  zoom: 15
+                });
+                
+                  //images not displaying!
+                var image ="../app/images/runLarge.png";
+                markerPosition = new google.maps.Marker({
+                    position: googlePosition,
+                    draggable: true,
+                    map: map,
+                    icon: image
+                });
+                  
+                }, function() {
+                handleLocationError(true);
+              });
+            } else {
+              // Browser doesn't support Geolocation
+              handleLocationError(false);
+            }
+        }
+    
+          function handleLocationError(browserHasGeolocation) {
+            alert(browserHasGeolocation ?
+              'Error: The Geolocation service failed.' :
+              'Error: Your browser doesn\'t support geolocation.');
+          }
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap">
+        </script>
+        <script async defer src="../app/js/record.js">
+        </script>
+          
+      </body>
+    </html>
