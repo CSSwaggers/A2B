@@ -42,3 +42,53 @@ function updatePosition(positionNew){
 ////        etc, etc
 ////    }]
 ////    }
+
+
+/* 
+//Buttons
+  <div data-role="content"> //OPTIONAL: text field for user to enter name for their workout 
+    <p id="startTracking_status"></p>
+      <div data-role="fieldcontain" class="ui-hide-label">
+        <label for="track_id">Track ID/Name:</label>
+        <input type="text" name="track_id" id="track_id" placeholder="Workout ID/Name"/>
+      </div>
+ 
+    <button data-role="button" id="startTracking_start">Start Tracking</button>
+    <button data-role="button" id="startTracking_stop">Stop Tracking</button>  
+     
+        <p id="startTracking_debug"></p>
+         
+  </div> 
+  
+  //Tracking/recording movement
+  var track_id = '';      // Name/ID of the exercise
+  var watch_id = null;    // ID of the geolocation
+  var tracking_data = []; // Array containing GPS position objects
+
+    $("#startTracking_start").live('click', function(){
+
+        // Start tracking the User
+        watch_id = navigator.geolocation.watchPosition(    //polls GPS feature of the phone and recieves constant updates on location
+
+            // Success                                     //if successful, pass the currentPath object
+            function(currentPath){
+                tracking_data.push(currentPath);
+            },
+
+            // Error
+            function(error){
+                console.log(Unable to track run!);
+            },
+
+            // Settings
+            { frequency: 3000, enableHighAccuracy: true });
+
+        // OPTIONAL: Tidy up the UI
+        track_id = $("#track_id").val();
+
+        $("#track_id").hide();
+
+        $("#startTracking_status").html("Tracking workout: <strong>" + track_id + "</strong>");
+    });
+  */
+  
