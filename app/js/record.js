@@ -46,23 +46,7 @@ function record(positionNew){
     Mypath.push(myLatlng);
     markerPosition.setTitle('Distance: ' + String(pathCurrent.distanceTotal()) + '</br>Time: ' + String(pathCurrent.timeTotal()));
 }
-        
-<<<<<<< HEAD
-//    if (recordOn == true){
-//                addLocationToCurrentPathObject(positionNew);
-//                addLocationToCurrentMapsPolyLine(positionNew);
-//                updateCurrentInfo(positionNew);
-//    }
-    
-//function addLocationToCurrentPathObject(positionNew){
-//    var placementNew = {
-//        lat: positionNew.coords.latitude,
-//        lng: positionNew.coords.longitude,
-//        time: positionNew.timesamp
-//    }
-//    currentPath.paths[currentPath..paths.length] = placementNew;
-//}
-//
+
 ////currentPath is an object as such:
 ////    
 ////    {
@@ -134,16 +118,3 @@ function record(positionNew){
         recornOn = false // necessary?
         
     }
-  */
-  
-=======
-function addToCurrentPathObject(positionNew) {
-    var placementNew = document.getElementById('geolocation');
-    placementNew.innerHTML = {
-        latitude:   positionNew.coords.latitude,
-        longitude:  positionNew.coords.longitude,
-        timestamp:  new Date(positionNew.timestamp)
-    }
-    currentPath.paths[currentPath.paths.length] = placementNew;
-}   
->>>>>>> master
