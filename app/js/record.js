@@ -1,3 +1,16 @@
+var pathCurrent = {
+    
+    paths: [{
+        lat: value,
+        lng: value,
+        time: value
+    }],
+    addPosition: function(positionNew){
+        this.paths.push({
+            lat: positionNew.coords.latitude,
+            lng: positionNew.coords.longitude,
+            time: positionNew.timestamp);}};
+
 navigator.geolocation.watchPosition(updatePosition);
 
 function updatePosition(positionNew){
@@ -11,11 +24,16 @@ function updatePosition(positionNew){
     }
 }
 
+function clickButton(){
     if (recordOn == true){
-                addToPathObject(positionNew);
-                addToCurrentMapsPolyLine(positionNew);
-                updateCurrentInfo(positionNew);
-    }
+        navigator.geolocation.watchPosition(record);
+};
+        
+function record(positionNew){
+    pathCurrent.addPosition(positionNew);
+    addToCurrentMapsPolyLine(positionNew); //create a function that updates the line on the maps
+    updateCurrentInfo(positionNew); //function that inserts data into HTML (Joon will provide HTML containers for data)
+}
 
 /*
 function addToCurrentPathObject(positionNew){
