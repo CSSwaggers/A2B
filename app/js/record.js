@@ -1,16 +1,15 @@
-
 navigator.geolocation.watchPosition(updatePosition);
 
 function updatePosition(positionNew){
-    if (markerPosition){
-        console.log(positionNew);
         var googlePosition = {lat: positionNew.coords.latitude, lng: positionNew.coords.longitude};
-        markerPosition.position = googlePosition;
-        
-            
-    }
+        markerPosition.setPosition(googlePosition);
+        map.setCenter(googlePosition);
 }
-    
+
+function record(positionNew){
+    console.log('update recording with new data');
+}
+        
 //    if (recordOn == true){
 //                addLocationToCurrentPathObject(positionNew);
 //                addLocationToCurrentMapsPolyLine(positionNew);
@@ -55,7 +54,7 @@ function updatePosition(positionNew){
  
     <button data-role="button" id="startTracking_start">Start Tracking</button>
     <button data-role="button" id="startTracking_stop">Stop Tracking</button>  
-     
+
         <p id="startTracking_debug"></p>
          
   </div> 
