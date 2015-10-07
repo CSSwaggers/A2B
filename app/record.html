@@ -2,6 +2,16 @@
     <html>
       <title>Launch</title>
       <head>
+                  <script src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp">
+        </script>
+          <meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="mobile-web-app-capable" content="yes" />
+<title>Assignment 2B</title>
+<meta name="description" content="ENG1003 Assignment 1 S2 2015">
+<meta name="author" content="Moses Yi-Jie Wan">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" sizes="196x196" href="bubble-icon.png" />
+<link rel="apple-touch-icon-precomposed" href="bubble-icon.png" />
         <style type="text/css">
          html, body { height: 100%; margin: 0; padding: 0; }
          #map { height: 100%; }
@@ -31,10 +41,11 @@
                 var image ="../app/images/runLarge.png";
                 markerPosition = new google.maps.Marker({
                     position: googlePosition,
-                    draggable: true,
                     map: map,
                     icon: image
                 });
+                  
+                google.maps.event.addListener(markerPosition, 'mousedown', recordStartStop)
                   
                 }, function() {
                 handleLocationError(true);
@@ -44,6 +55,8 @@
               handleLocationError(false);
             }
         }
+            
+            google.maps.event.addDomListener(window, "load", initMap);
     
           function handleLocationError(browserHasGeolocation) {
             alert(browserHasGeolocation ?
@@ -51,9 +64,8 @@
               'Error: Your browser doesn\'t support geolocation.');
           }
         </script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap">
-        </script>
-        <script async defer src="../app/js/record.js">
+
+        <script src="../app/js/record.js">
         </script>
           
       </body>
