@@ -9,19 +9,20 @@ var pathCurrent = {
         this.paths.push({
             lat: positionNew.coords.latitude,
             lng: positionNew.coords.longitude,
-            time: positionNew.timestamp);}};
+            time: positionNew.timestamp
+        });
+    }};
 
 navigator.geolocation.watchPosition(updatePosition);
 
 function updatePosition(positionNew){
-    if (markerPosition){
-        console.log(positionNew);
-        var googlePosition = {lat: positionNew.coords.latitude, 
-                              lng: positionNew.coords.longitude};
-        markerPosition.position = googlePosition;
-        
-            
-    }
+        var googlePosition = {lat: positionNew.coords.latitude, lng: positionNew.coords.longitude};
+        markerPosition.setPosition(googlePosition);
+        map.setCenter(googlePosition);
+}
+
+function record(positionNew){
+    console.log('update recording with new data');
 }
 
 function clickButton(){

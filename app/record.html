@@ -14,6 +14,8 @@
         
           var map;
           var markerPosition;
+          var idRecord;
+          var recordOn = false;
         
             function initMap(){
             
@@ -24,21 +26,33 @@
                 
                 map = new google.maps.Map(document.getElementById('map'), {
                   center: googlePosition,
-                  zoom: 15
+                  zoom: 150
                 });
                 
-                  //images not displaying!
                 var image ="../app/images/runLarge.png";
                 markerPosition = new google.maps.Marker({
                     position: googlePosition,
-                    draggable: true,
                     map: map,
                     icon: image
                 });
+                markerPosition.addListener('click', function() {
+                    if (recordOn) {
+                        console.log('Stop recording path');
+                        recordOn = false;
+                        navigator.geolocation.clearWatch(idRecord);
+                        markerPosition.setAnimation(null);
+                    }
+                    else {
+                        console.log('Start recording path');
+                        idRecord = navigator.geolocation.watchPosition(record);
+                        recordOn = true;
+                        markerPosition.setAnimation(google.maps.Animation.BOUNCE);
+                    }
                   
                 }, function() {
                 handleLocationError(true);
               });
+            });
             } else {
               // Browser doesn't support Geolocation
               handleLocationError(false);
