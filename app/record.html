@@ -14,6 +14,7 @@
         
           var map;
           var markerPosition;
+          var polyPath;
           var idRecord;
           var recordOn = false;
         
@@ -34,6 +35,12 @@
                     position: googlePosition,
                     map: map,
                     icon: image
+                });
+                polyPath = new google.maps.Polyline({
+                    map: map,
+                    strokeColor: '#000000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3
                 });
                 markerPosition.addListener('click', function() {
                     if (recordOn) {
