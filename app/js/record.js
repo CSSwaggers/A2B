@@ -63,7 +63,7 @@ function record(positionNew){
   var track_id = '';      // Name/ID of the exercise
   var watch_id = null;    // ID of the geolocation
   var tracking_data = []; // Array containing GPS position objects
-
+  var final_data = []; // Array for storing the data at end of tracking
     $("#startTracking_start").live('click', function(){
 
         // Start tracking the User
@@ -89,5 +89,12 @@ function record(positionNew){
 
         $("#startTracking_status").html("Tracking workout: <strong>" + track_id + "</strong>");
     });
+    
+    function stopRecordingRoute(){
+        final_data = tracking_data; //(stores array into new array)
+        geolocation.clearWatch(updatePosition); //clears the id "updatePosition" set by the geolocation.watchPosition at start
+        recornOn = false // necessary?
+        
+    }
   */
   
