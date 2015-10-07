@@ -4,7 +4,7 @@
       <head>
         <style type="text/css">
          html, body { height: 100%; margin: 0; padding: 0; }
-         #map { height: 100%; 
+         #map { height: 100%; }
         </style>
       </head>
       <body>
@@ -12,10 +12,11 @@
         <div id="map"></div>
         <script type="text/javascript">
         
-            var map;
-            var markerPosition;
-            var idRecord;
-            var recordOn = false;
+          var map;
+          var markerPosition;
+          var polyPath;
+          var idRecord;
+          var recordOn = false;
         
             function initMap(){
             
@@ -28,14 +29,18 @@
                   center: googlePosition,
                   zoom: 150
                 });
-            
-                  console.log(position);
-                  
+                
                 var image ="../app/images/runLarge.png";
                 markerPosition = new google.maps.Marker({
                     position: googlePosition,
                     map: map,
                     icon: image
+                });
+                polyPath = new google.maps.Polyline({
+                    map: map,
+                    strokeColor: '#000000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 3
                 });
                 markerPosition.addListener('click', function() {
                     if (recordOn) {
@@ -67,9 +72,10 @@
               'Error: Your browser doesn\'t support geolocation.');
           }
         </script>
-        <script async src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap">
+        <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap">
         </script>
-        <script defer src="../app/js/record.js">
+        
+        <script async defer src="../app/js/record.js">
         </script>
           
       </body>
