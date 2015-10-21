@@ -1,0 +1,45 @@
+
+.float-button {
+position: fixed;
+right: 4.5%;
+bottom: -2.5%;
+margin-bottom: 0%;
+z-index: 998;
+}
+
+a {
+   text-decoration: none;
+   color:#000;
+}
+
+.mdl-navigation__link{
+color: rgba(0, 0, 0, 0.54);
+} 
+
+/* custom styles */
+
+
+.map-hidden{
+display:none;
+}
+
+.map-visible{
+display:block;
+}
+
+
+
+  .demo-card-wide.mdl-card {
+    width: 94%;
+    height: 54%;
+    margin: 3%;
+  }
+  .demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 80%;
+    
+  }
+  .demo-card-wide > .mdl-card__menu {
+    color: #fff;
+  }
+

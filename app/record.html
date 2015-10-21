@@ -1,82 +1,130 @@
-    <!DOCTYPE html>
-    <html>
-      <title>Launch</title>
-      <head>
+<!DOCTYPE html>
+<html>
+    <title>Launch</title>
+    <head>
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <title>Assignment 2B</title>
+        <meta name="description" content="ENG1003 Assignment 1 S2 2015">
+        <meta name="author" content="Moses Yi-Jie Wan">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+        <link rel="shortcut icon" sizes="196x196" href="bubble-icon.png" />
+        <link rel="apple-touch-icon-precomposed" href="bubble-icon.png" />
         <style type="text/css">
-         html, body { height: 100%; margin: 0; padding: 0; }
-         #map { height: 100%; }
+            html, body { height: 100%; margin: 0; padding: 0; }
+            #map { height: 85%; }
+            #locationInfo { height: 5% }
         </style>
-      </head>
-      <body>
+    </head>
     
-        <div id="map"></div>
-        <script type="text/javascript">
-        
-          var map;
-          var markerPosition;
-          var polyPath;
-          var idRecord;
-          var recordOn = false;
-        
-            function initMap(){
+    <body>
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+          <header class="mdl-layout__header"style="position:absolute;top:0vh;width:100%;">
+            <div class="mdl-layout__header-row" style="position:absolute;top:0vh;width:100%;">
+              <button class="mdl-button mdl-js-button mdl-button--icon" style= "position:absolute;top: 2.3vh;left:3%;" onClick="location.href='../app/index.html';">
+                <i class="material-icons">arrow_back</i>
+              </button>             
+              <!-- Title -->
+              <span class="mdl-layout-title" style="height:6.3vh;font-size:120%;" id="locationData"></span>
+              <!-- Add spacer, to align navigation to the right -->
+              <div class="mdl-layout-spacer"></div>
+              <span class="mdl-layout-title" style="height:2.7vh;font-size:120%" id="locationAccuracy"></span>
+            </div>
+          </header>
             
-            if (navigator.geolocation) {
-              navigator.geolocation.getCurrentPosition(function(position) {
-                  
-                var googlePosition = {lat: position.coords.latitude, lng: position.coords.longitude};
-                
-                map = new google.maps.Map(document.getElementById('map'), {
-                  center: googlePosition,
-                  zoom: 150
-                });
-                
-                var image ="../app/images/runLarge.png";
-                markerPosition = new google.maps.Marker({
-                    position: googlePosition,
-                    map: map,
-                    icon: image
-                });
-                polyPath = new google.maps.Polyline({
-                    map: map,
-                    strokeColor: '#000000',
-                    strokeOpacity: 1.0,
-                    strokeWeight: 3
-                });
-                markerPosition.addListener('click', function() {
-                    if (recordOn) {
-                        console.log('Stop recording path');
-                        recordOn = false;
-                        navigator.geolocation.clearWatch(idRecord);
-                        markerPosition.setAnimation(null);
-                    }
-                    else {
-                        console.log('Start recording path');
-                        idRecord = navigator.geolocation.watchPosition(record);
-                        recordOn = true;
-                        markerPosition.setAnimation(google.maps.Animation.BOUNCE);
-                    }
-                  
-                }, function() {
-                handleLocationError(true);
-              });
-            });
-            } else {
-              // Browser doesn't support Geolocation
-              handleLocationError(false);
+
+          
+          <main class="mdl-layout__content">
+            <div class="page-content">
+                <!-- Your content goes here -->
+                <div id="map" style="height:89vh"></div>
+                <div id="controls" style="display:block">
+                    <button id="button" style="height:11vh;width:100%;font-size:150%;position:absolute;bottom:0vh;right:0vh;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" onclick="buttonClick()">
+                        Start Recording
+                    </button>
+                    <table id="infoTable" style="display:none;position:absolute;bottom: 0vh;" class="mdl-data-table mdl-js-data-table">
+                      <thead>
+                        <tr style = "height:5.5vh;padding: 0vh">
+                          <th style = "height:5.5vh; padding: 0vh" class="mdl-data-table__cell--non-numeric" align="center"></th>
+                          <th style = "height:5.5vh; padding: 0vh; width: 40%" class="mdl-data-table__cell--non-numeric" align="center">Distance</th>
+                          <th style = "height:5.5vh; padding: 0vh; width: 40%" class="mdl-data-table__cell--non-numeric" align="center">Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr style = "height:5.5vh;padding: 0vh">
+                          <td style = "height:5.5vh;padding: 0vh" class="mdl-data-table__cell--non-numeric" align="center"></td>
+                          <td style = "height:5.5vh;padding: 0vh;width: 40%" class="mdl-data-table__cell--non-numeric" align="center" id="distance">0.00km</td>
+                          <td style = "height:5.5vh;padding: 0vh;width: 40%" class="mdl-data-table__cell--non-numeric" align="center" id="time">0:0</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                </div>
+            </div>
+          </main>
+        </div>
+        
+
+        <script type="text/javascript">
+            var map;
+            var markerPosition;
+            var markerStart;
+            var polyPath;
+            var idRecord;
+            var recordOn = false;
+            function initMap(){
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        var googlePosition = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+                        console.log(googlePosition);
+                        map = new google.maps.Map(document.getElementById('map'), {
+                            center: googlePosition,
+                            zoom: 150,
+                            disableDefaultUI: true
+                        });
+                        var image ="../app/images/finishLarge.png";
+                        markerPosition = new google.maps.Marker({
+                            position: googlePosition,
+                            map: map,
+                            icon: image
+                        });
+                        polyPath = new google.maps.Polyline({
+                            map: map,
+                            strokeColor: '#000000',
+                            strokeOpacity: 1.0,
+                            strokeWeight: 3
+                        });
+                    
+                        markerStart = new google.maps.Marker({
+                            map: map,
+                            icon: {
+                                url: '../app/images/startLarge.png',
+                                size: new google.maps.Size(64,64),
+                                origin: new google.maps.Point(0,0),
+                                anchor: new google.maps.Point(24,24)
+                            }
+                        });
+                    }, function() {
+                        handleLocationError(true);
+                    });
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false);
+                }
             }
-        }
-    
-          function handleLocationError(browserHasGeolocation) {
-            alert(browserHasGeolocation ?
-              'Error: The Geolocation service failed.' :
-              'Error: Your browser doesn\'t support geolocation.');
-          }
+            function handleLocationError(browserHasGeolocation) {
+                alert(browserHasGeolocation ?
+                      'Error: The Geolocation service failed.' :
+                      'Error: Your browser doesn\'t support geolocation.');
+            }
         </script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?v=3&amp;key=&amp;callback=initMap">
         </script>
-        
+        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.pink-red.min.css">
+        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script async defer src="../app/js/record.js">
         </script>
-          
-      </body>
-    </html>
+
+    </body>
+</html>

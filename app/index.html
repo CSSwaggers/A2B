@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <title>Yyst Fitness Tracker</title>
+    
+    
+    
+    
+        <link rel="stylesheet" href="css/style.css">
+
+    
+    
+    
+  </head>
+
+  <body>
+
+    <html>
+	<head
+		<!-- Material Design Lite -->
+		<script src="https://storage.googleapis.com/code.getmdl.io/1.0.0/material.min.js"></script>
+		<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.5/material.pink-red.min.css" /> 
+		<!-- Material Design icon font -->
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+	</head>
+	
+	<!-- Always shows a header, even in smaller screens. -->
+	<div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+	<header class="mdl-layout__header">
+			<div class="mdl-layout__header-row">
+				<!-- Title -->
+					<span class="mdl-layout-title">YysT</span>
+				<!-- Add spacer, to align navigation to the right -->
+					<div class="mdl-layout-spacer"></div>
+				<!-- Navigation. We hide it in small screens. -->
+					<button class="android-more-button mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+					<i class="material-icons">more_vert</i>
+					</button>
+					<ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+					<li class="mdl-menu__item" onclick="setWeight()">Set Weight</li>
+					<li class="mdl-menu__item" onclick="sortName()">Sort by Name</li>
+                    <li class="mdl-menu__item" onclick="sortDistance()">Sort by Distance</li>
+                    <li class="mdl-menu__item" onclick="sortSpeed()">Sort by Speed</li>
+                    <li class="mdl-menu__item" onclick="sortDate()">Sort by Date</li>
+                    <li class="mdl-menu__item" onclick="sortTime()">Sort by Time</li>
+                    <li class="mdl-menu__item" onclick="reverseOrder()">Reverse Order</li>
+                    <li class="mdl-menu__item" onclick="routeDelete('all')">Clear all Runs</li>
+                        
+			</ul>
+		</div>
+	</header>
+	
+	<div class="mdl-layout__drawer">
+		<span class="mdl-layout-title">YysT</span>
+			<div class="mdl-card ">
+				<div class="mdl-card__title">
+					<h2 class="mdl-card__title-text">"Beta versions"</h2>
+					</div>
+			<div class="mdl-card__supporting-text">"Credentials"</div>
+			<nav class="mdl-navigation">
+				<a class="mdl-navigation__link">"Stats"</a>
+				<a class="mdl-navigation__link">"Personal Bests"</a>
+			</nav>
+		</div>
+	</div>
+	
+	
+  <main class="mdl-layout__content">
+    <section class="mdl-layout__tab-panel is-active" id="homepage">
+      <div class="page-content">
+	  <!--HOME -->
+	  <div class="page-content">			
+		<div class="float-button">
+						<h1 class="mdl-typography--display-3 mdl-typography--font-thin run-date-out">
+							<a  href="record.html">		<!-- record must be in the same file -->
+								<button class="android-fab mdl-button mdl-button--colored mdl-js-button mdl-button--fab mdl-js-ripple-effect">
+							  <i class="material-icons">add</i>
+							</button>
+							</a>
+						</h1>	
+		</div>
+
+	<div id="homepage-card-whole"></div>
+
+
+<script src="../app/js/pushCardFunct.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=&amp;callback=sortDate"></script>
+
+
+</main>
+</div>
+</html>
+    
+    
+    
+    
+    
+  </body>
+</html>
